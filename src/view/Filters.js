@@ -1,38 +1,76 @@
-export default class FilterView {
-    constructor() {
-      this.element = null;
-    }
-  
-    getTemplate() {
-      return `
-        <form class="trip-filters" action="#" method="get">
-          <div class="trip-filters__filter">
-            <input id="filter-everything" class="trip-filters__filter-input visually-hidden" type="radio" name="trip-filter" value="everything" checked>
-            <label class="trip-filters__filter-label" for="filter-everything">Everything</label>
-          </div>
-          <div class="trip-filters__filter">
-            <input id="filter-future" class="trip-filters__filter-input visually-hidden" type="radio" name="trip-filter" value="future">
-            <label class="trip-filters__filter-label" for="filter-future">Future</label>
-          </div>
-          <div class="trip-filters__filter">
-            <input id="filter-present" class="trip-filters__filter-input visually-hidden" type="radio" name="trip-filter" value="present">
-            <label class="trip-filters__filter-label" for="filter-present">Present</label>
-          </div>
-          <div class="trip-filters__filter">
-            <input id="filter-past" class="trip-filters__filter-input visually-hidden" type="radio" name="trip-filter" value="past">
-            <label class="trip-filters__filter-label" for="filter-past">Past</label>
-          </div>
-        </form>
-      `;
-    }
-  
-    getElement() {
-      if (!this.element) {
-        const temp = document.createElement('div');
-        temp.innerHTML = this.getTemplate();
-        this.element = temp.firstElementChild;
-      }
-      return this.element;
-    }
+import AbstractView from './abstract-view.js';   // скорректируйте путь, если нужно
+
+export default class FilterView extends AbstractView {
+  constructor() {
+    super();
+    // Пока нет параметров → конструктор остаётся почти пустым
   }
-  
+
+  /**
+   * @override
+   * @returns {string} HTML-шаблон блока фильтров
+   */
+  get template() {
+    return `
+      <form class="trip-filters" action="#" method="get">
+        <div class="trip-filters__filter">
+          <input
+            id="filter-everything"
+            class="trip-filters__filter-input  visually-hidden"
+            type="radio"
+            name="trip-filter"
+            value="everything"
+            checked
+          >
+          <label class="trip-filters__filter-label" for="filter-everything">
+            Everything
+          </label>
+        </div>
+
+        <div class="trip-filters__filter">
+          <input
+            id="filter-future"
+            class="trip-filters__filter-input  visually-hidden"
+            type="radio"
+            name="trip-filter"
+            value="future"
+          >
+          <label class="trip-filters__filter-label" for="filter-future">
+            Future
+          </label>
+        </div>
+
+        <div class="trip-filters__filter">
+          <input
+            id="filter-present"
+            class="trip-filters__filter-input  visually-hidden"
+            type="radio"
+            name="trip-filter"
+            value="present"
+          >
+          <label class="trip-filters__filter-label" for="filter-present">
+            Present
+          </label>
+        </div>
+
+        <div class="trip-filters__filter">
+          <input
+            id="filter-past"
+            class="trip-filters__filter-input  visually-hidden"
+            type="radio"
+            name="trip-filter"
+            value="past"
+          >
+          <label class="trip-filters__filter-label" for="filter-past">
+            Past
+          </label>
+        </div>
+      </form>
+    `.trim();
+  }
+
+  // Удалено:
+  // • this.element = null
+  // • getElement()
+  // • getTemplate()
+}

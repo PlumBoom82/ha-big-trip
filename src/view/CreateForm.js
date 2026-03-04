@@ -1,11 +1,19 @@
-export default class CreateFormView {
-    constructor() {
-      this.element = null;
-    }
-  
-    getTemplate() {
-      return `
-        <form class="event event--edit" action="#" method="post">
+import AbstractView from './abstract-view.js'; // предполагаем, что путь правильный
+
+export default class CreateFormView extends AbstractView {
+  constructor() {
+    super();           // ← обязательно!
+    // если нужно хранить какие-то начальные данные — добавляйте сюда приватные поля
+    // пока в вашем варианте данных нет → оставляем пустым
+  }
+
+  /**
+   * @override
+   * @returns {string}
+   */
+  get template() {
+    return `
+      <form class="event event--edit" action="#" method="post">
         <header class="event__header">
           <div class="event__type-wrapper">
             <label class="event__type  event__type-btn" for="event-type-toggle-create">
@@ -31,7 +39,7 @@ export default class CreateFormView {
           <div class="event__field-group event__field-group--time">
             <label class="visually-hidden" for="event-start-time-create">From</label>
             <input class="event__input event__input--time" id="event-start-time-create" type="text" name="event-start-time" value="">
-            &mdash;
+            —
             <label class="visually-hidden" for="event-end-time-create">To</label>
             <input class="event__input event__input--time" id="event-end-time-create" type="text" name="event-end-time" value="">
           </div>
@@ -39,7 +47,7 @@ export default class CreateFormView {
           <div class="event__field-group event__field-group--price">
             <label class="event__label" for="event-price-create">
               <span class="visually-hidden">Price</span>
-              &euro;
+              €
             </label>
             <input class="event__input event__input--price" id="event-price-create" type="text" name="event-price" value="">
           </div>
@@ -48,16 +56,11 @@ export default class CreateFormView {
           <button class="event__reset-btn" type="reset">Delete</button>
         </header>
       </form>
-      `;
-    }
-  
-    getElement() {
-      if (!this.element) {
-        const temp = document.createElement('div');
-        temp.innerHTML = this.getTemplate();
-        this.element = temp.firstElementChild;
-      }
-      return this.element;
-    }
+    `.trim(); // .trim() — хорошая привычка, убирает лишние переносы
   }
-  
+
+  // Больше НЕ нужно:
+  // - this.element = null
+  // - getElement()
+  // - getTemplate()  ← переименован в get template()
+}
