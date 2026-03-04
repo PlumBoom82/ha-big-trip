@@ -1,6 +1,6 @@
-import AbstractView from './abstract-view.js';   // скорректируйте путь при необходимости
+import AbstractStatefulView  from '/src/framework/view/abstract-stateful-view.js';
 
-export default class EditFormView extends AbstractView {
+export default class EditFormView extends AbstractStatefulView  {
   constructor() {
     super();  // ← обязательно при наследовании
   }
@@ -77,6 +77,10 @@ export default class EditFormView extends AbstractView {
         </header>
       </form>
     `.trim();
+  }
+
+  _restoreHandlers() {
+    return undefined;
   }
 
   // Больше НЕ нужны:
