@@ -1,4 +1,5 @@
 export default class SortingsView {
+
   constructor() {
     this.element = null;
   }
